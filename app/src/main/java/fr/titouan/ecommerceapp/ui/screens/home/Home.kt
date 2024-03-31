@@ -16,8 +16,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import fr.titouan.ecommerceapp.Debug
-import fr.titouan.ecommerceapp.ui.commonsUi.ErrorScreen
-import fr.titouan.ecommerceapp.ui.commonsUi.ProductsGridScreen
+import fr.titouan.ecommerceapp.ui.components.ErrorScreen
+import fr.titouan.ecommerceapp.ui.components.ProductsGridScreen
 import fr.titouan.ecommerceapp.ui.screens.home.views.BestSellersUiState
 import fr.titouan.ecommerceapp.R
 import fr.titouan.ecommerceapp.ui.screens.home.views.HomeViewModel

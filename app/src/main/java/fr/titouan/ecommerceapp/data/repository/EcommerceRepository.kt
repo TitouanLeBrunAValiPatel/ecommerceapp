@@ -1,6 +1,7 @@
 package fr.titouan.ecommerceapp.data.repository
 
 import fr.titouan.ecommerceapp.model.Category
+import fr.titouan.ecommerceapp.model.Color
 import fr.titouan.ecommerceapp.model.Product
 import fr.titouan.ecommerceapp.model.ProductsCategory
 import fr.titouan.ecommerceapp.network.EcommerceApiService
@@ -22,6 +23,10 @@ interface EcommerceRepository {
 
 //    Categories
     suspend fun getCategories(): List<Category>
+
+//    Colors
+    suspend fun getColors() : List<Color>
+    suspend fun getColor(idColor: Int) : Color
 }
 class NetworkEcommerceRepository(
     private val ecommerceApiService: EcommerceApiService
@@ -50,4 +55,10 @@ class NetworkEcommerceRepository(
     }
 //    Categories
     override suspend fun getCategories(): List<Category> = ecommerceApiService.getCategories()
+
+//    Colors
+
+    override suspend fun getColors(): List<Color> = ecommerceApiService.getColors()
+
+    override suspend fun getColor(idColor: Int): Color = ecommerceApiService.getColor(idColor)
 }

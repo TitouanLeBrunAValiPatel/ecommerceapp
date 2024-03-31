@@ -4,6 +4,7 @@ import android.content.Context
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import fr.titouan.ecommerceapp.data.repository.EcommerceRepository
 import fr.titouan.ecommerceapp.data.repository.NetworkEcommerceRepository
+import fr.titouan.ecommerceapp.data.sharedPreferences.CartManager
 import fr.titouan.ecommerceapp.network.EcommerceApiService
 import kotlinx.serialization.json.Json
 import okhttp3.MediaType.Companion.toMediaType
@@ -11,6 +12,8 @@ import retrofit2.Retrofit
 
 interface AppContainer {
     val ecommerceRepository: EcommerceRepository
+    fun provideCartManager(context: Context): CartManager
+
 }
 class DefaultAppContainer() : AppContainer {
     private val baseUrl = "http://10.0.2.2:8080/api/"
@@ -28,5 +31,9 @@ class DefaultAppContainer() : AppContainer {
 
     override val ecommerceRepository: EcommerceRepository by lazy {
         NetworkEcommerceRepository(retrofitService)
+    }
+
+    override fun provideCartManager(context: Context): CartManager {
+        return CartManager(context)
     }
 }

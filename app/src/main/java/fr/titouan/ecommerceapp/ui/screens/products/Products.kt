@@ -27,11 +27,8 @@ import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import fr.titouan.ecommerceapp.Debug
 import fr.titouan.ecommerceapp.R
-import fr.titouan.ecommerceapp.ui.commonsUi.ErrorScreen
-import fr.titouan.ecommerceapp.ui.commonsUi.ProductsGridScreen
-import fr.titouan.ecommerceapp.ui.screens.home.Home
-import fr.titouan.ecommerceapp.ui.screens.home.views.BestSellersUiState
-import fr.titouan.ecommerceapp.ui.screens.home.views.HomeViewModel
+import fr.titouan.ecommerceapp.ui.components.ErrorScreen
+import fr.titouan.ecommerceapp.ui.components.ProductsGridScreen
 import fr.titouan.ecommerceapp.ui.screens.products.views.ProductsUiState
 import fr.titouan.ecommerceapp.ui.screens.products.views.ProductsViewModel
 

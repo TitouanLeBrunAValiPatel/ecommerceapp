@@ -1,4 +1,4 @@
-package fr.titouan.ecommerceapp.ui.commonsUi
+package fr.titouan.ecommerceapp.ui.components
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues

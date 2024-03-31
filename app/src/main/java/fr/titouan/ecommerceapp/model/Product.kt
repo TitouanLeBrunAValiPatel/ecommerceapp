@@ -1,5 +1,8 @@
 package fr.titouan.ecommerceapp.model
 
+import android.util.Log
+import androidx.compose.runtime.MutableState
+import fr.titouan.ecommerceapp.Debug
 import fr.titouan.ecommerceapp.data.GetSampleData
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -33,8 +36,6 @@ data class Product(
                 2
             )
         )
-    val formattedPrice = NumberFormat.getCurrencyInstance().format(price)
-
 }
 
 @Serializable
@@ -44,4 +45,13 @@ data class ProductsCategory(
 ) {
     val safeCategory: Category
         get() = category ?: GetSampleData.getCategory()
+}
+
+@Serializable
+data class ProductInCart(
+    val product: Product,
+    val color: Color,
+    var quantity : Int
+) {
+
 }

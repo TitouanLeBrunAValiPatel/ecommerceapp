@@ -14,4 +14,12 @@
     <string name="category_title">%1$s</string>
     <string name="product_title">%1$s</string>
     <string name="product_title_default">Product Detail</string>
+    <string name="cart_title">My Cart</string>
+    <string name="navbar_edit_action">Edit</string>
+    <string name="navbar_checked_action">Check</string>
+    <string name="icon_delete_button">Delete</string>
+    <string name="cart_quantity_text">Quantity</string>
+    <string name="cart_empty">Your cart is empty</string>
+    <string name="cart_total_price_text">Total</string>
+    <string name="cart_total_price">%1$f</string>
 </resources>

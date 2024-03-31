@@ -20,6 +20,7 @@ import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import fr.titouan.ecommerceapp.R
 import fr.titouan.ecommerceapp.model.Product
+import fr.titouan.ecommerceapp.ui.commonsUi.getCurrencyPrice
 
 @Composable
 fun ProductDetail(
@@ -43,7 +44,7 @@ fun ProductDetail(
 
         Text(text = product.name)
         Text(text = product.description)
-        Text(text = product.formattedPrice)
+        Text(text = getCurrencyPrice(price = product.price))
     }
 
 }
