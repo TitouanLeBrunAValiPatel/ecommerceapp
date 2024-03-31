@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">Ecommerce App</string>
+    <string name="navbar_back_button">Back</string>
+    <string name="nav_home">Home</string>
+    <string name="nav_categories">Categories</string>
+    <string name="home_title">Best Sellers</string>
+    <string name="loading_failed">Loading failed</string>
+    <string name="retry">Retry</string>
+    <string name="product_image">Product image of the %1$s</string>
+    <string name="nav_favorite_product">Favorite product</string>
+    <string name="nav_cart">My cart</string>
+    <string name="nav_account">My account</string>
+    <string name="categories_title">Categories</string>
+    <string name="category_title">%1$s</string>
+    <string name="product_title">%1$s</string>
+    <string name="product_title_default">Product Detail</string>
+</resources>
