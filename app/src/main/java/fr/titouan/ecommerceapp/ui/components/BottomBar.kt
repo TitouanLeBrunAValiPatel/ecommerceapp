@@ -16,6 +16,7 @@ import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
 import fr.titouan.ecommerceapp.R
+import fr.titouan.ecommerceapp.ui.screens.account.Account
 import fr.titouan.ecommerceapp.ui.screens.cart.Cart
 import fr.titouan.ecommerceapp.ui.screens.category.Category
 import fr.titouan.ecommerceapp.ui.screens.home.Home
@@ -23,7 +24,8 @@ import fr.titouan.ecommerceapp.ui.theme.EcommerceappTheme
 
 @Composable
 fun BottomBar(
-    navController: NavController
+    navController: NavController,
+    onAccountIconClick: () -> Unit
 ) {
     BottomAppBar(
         actions = {
@@ -49,11 +51,17 @@ fun BottomBar(
                         contentDescription = stringResource(id = R.string.nav_cart)
                     )
                 }
-                IconButton(onClick = { navController.navigate(Home.Route) }, modifier = Modifier.align(Alignment.CenterVertically)) {
+//                IconButton(onClick = { navController.navigate(Account.Route) }, modifier = Modifier.align(Alignment.CenterVertically)) {
+//                    Icon(imageVector = ImageVector.vectorResource(R.drawable.ic_menu_account),
+//                        contentDescription = stringResource(id = R.string.nav_account)
+//                    )
+//                }
+                IconButton(onClick = { onAccountIconClick() }, modifier = Modifier.align(Alignment.CenterVertically)) {
                     Icon(imageVector = ImageVector.vectorResource(R.drawable.ic_menu_account),
                         contentDescription = stringResource(id = R.string.nav_account)
                     )
                 }
+
             }
 
         }
@@ -64,6 +72,6 @@ fun BottomBar(
 @Composable
 fun BottomBarPreview() {
     EcommerceappTheme {
-        BottomBar(navController = NavController(LocalContext.current))
+        BottomBar(navController = NavController(LocalContext.current), onAccountIconClick = {})
     }
 }

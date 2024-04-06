@@ -10,8 +10,8 @@ import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import fr.titouan.ecommerceapp.EcommerceApplication
 import fr.titouan.ecommerceapp.data.GetSampleData
+import fr.titouan.ecommerceapp.data.network.NetworkResult
 import fr.titouan.ecommerceapp.data.repository.EcommerceRepository
-import fr.titouan.ecommerceapp.data.repository.NetworkResult
 import fr.titouan.ecommerceapp.model.Product
 import kotlinx.coroutines.launch
 

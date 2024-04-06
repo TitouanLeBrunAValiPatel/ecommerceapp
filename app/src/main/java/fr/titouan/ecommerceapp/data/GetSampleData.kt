@@ -2,9 +2,13 @@ package fr.titouan.ecommerceapp.data
 
 import fr.titouan.ecommerceapp.model.Category
 import fr.titouan.ecommerceapp.model.Color
+import fr.titouan.ecommerceapp.model.Order
 import fr.titouan.ecommerceapp.model.Product
 import fr.titouan.ecommerceapp.model.ProductInCart
+import fr.titouan.ecommerceapp.model.ProductInOrder
 import fr.titouan.ecommerceapp.model.ProductsCategory
+import fr.titouan.ecommerceapp.model.User
+import kotlinx.serialization.SerialName
 import kotlin.random.Random
 
 object GetSampleData {
@@ -92,6 +96,80 @@ object GetSampleData {
             )
         }
         return colors
+    }
+
+    fun getUser(userId : Int) : User {
+        return User(
+            idUser = userId,
+            name = "Jean",
+            mail = "titouan@gmail.com",
+            gender = "M",
+            city = "29000",
+            postCode = "Quimper"
+        )
+    }
+
+    fun getUsers(length: Int) : List<User> {
+        val users = List(length) {
+            User(
+                idUser = it,
+                name = "Jean $it",
+                mail = "titouan$it@gmail.com",
+                gender = "M",
+                city = "2900$it",
+                postCode = "Quimper"
+            )
+        }
+        return users
+    }
+
+    fun getProductInOrder(productId: Int) : ProductInOrder {
+        return ProductInOrder(
+
+            product = getProduct(productId),
+            color = getColor(2),
+            priceTotal = Random.nextFloat(),
+            image = "https://www.atmosphera.com/fstrz/r/s/www.atmosphera.com/fr/phototheque/atmosphera.com/65000/medium/01W064824A.jpg?frz-v=1548",
+            quantity = Random.nextInt(1, 11)
+        )
+    }
+
+    fun getProductsInOrder(length: Int) : List<ProductInOrder> {
+        val productsInOrder = List(length) {
+            ProductInOrder(
+                product = getProduct(it),
+                color = getColor(2),
+                priceTotal = Random.nextFloat(),
+                image = "https://www.atmosphera.com/fstrz/r/s/www.atmosphera.com/fr/phototheque/atmosphera.com/65000/medium/01W064824A.jpg?frz-v=1548",
+                quantity = Random.nextInt(1, 11)
+            )
+        }
+        return productsInOrder
+
+    }
+
+    fun getOrders(length: Int): List<Order> {
+        val orders = List(length) {
+            Order(
+                idOrder =  it,
+                user=  getUser(it),
+                date = "12 december",
+                products =  getProductsInOrder(Random.nextInt(1, 11)),
+                totalPrice = Random.nextFloat()
+            )
+        }
+        return orders
+    }
+
+    fun getOrder(orderId : Int): Order {
+        return Order(
+            idOrder =  orderId,
+            user=  getUser(orderId),
+            date = "12 december",
+            products =  getProductsInOrder(Random.nextInt(1, 11)),
+            totalPrice = Random.nextFloat()
+        )
+
     }
 
 

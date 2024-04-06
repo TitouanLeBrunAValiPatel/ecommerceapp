@@ -84,9 +84,16 @@ dependencies {
     implementation("com.squareup.retrofit2:retrofit:2.10.0")
     implementation("io.coil-kt:coil-compose:2.4.0")
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.0")
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
 
     // Coil
     implementation("io.coil-kt:coil-compose:2.4.0")
 
+    // Auth google
+    implementation("com.google.android.gms:play-services-auth:21.0.0")
+    implementation("androidx.credentials:credentials:1.2.1")
+    implementation("androidx.credentials:credentials-play-services-auth:1.2.1")
+    implementation("com.google.android.libraries.identity.googleid:googleid:1.1.0")
+    implementation("androidx.credentials:credentials:1.3.0-alpha01")
 
 }

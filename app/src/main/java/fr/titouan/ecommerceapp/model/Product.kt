@@ -55,3 +55,17 @@ data class ProductInCart(
 ) {
 
 }
+
+@Serializable
+data class ProductInOrder(
+    val product : Product,
+    val priceTotal : Float,
+    val color : Color?,
+    @SerialName("thumbnail") val image : String,
+    var quantity : Int
+){
+    val safeDescription: String
+        get() = product.description ?: "There is no description for this product"
+    val safeColor: Color
+        get() = color ?: Color(2, name = "Red", "#OOOOOO")
+}

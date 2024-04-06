@@ -22,8 +22,10 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import fr.titouan.ecommerceapp.ui.screens.home.Home
 import fr.titouan.ecommerceapp.R
+import fr.titouan.ecommerceapp.ui.screens.account.Account
 import fr.titouan.ecommerceapp.ui.screens.cart.Cart
 import fr.titouan.ecommerceapp.ui.screens.category.Category
+import fr.titouan.ecommerceapp.ui.screens.login.Login
 import fr.titouan.ecommerceapp.ui.theme.EcommerceappTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -49,6 +51,8 @@ fun TopAppBar(
                 Home.Title.value -> true
                 Category.Title.value -> true
                 Cart.Title.value -> true
+                Account.Title.value -> true
+                Login.Title.value -> true
                 else -> false
             }
             if(!isTopLevel) {
