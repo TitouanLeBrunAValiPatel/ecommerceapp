@@ -13,6 +13,7 @@ import okhttp3.ResponseBody
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
+import retrofit2.http.PATCH
 import retrofit2.http.POST
 import retrofit2.http.Path
 
@@ -22,9 +23,9 @@ interface EcommerceApiService {
     suspend fun getProducts(): List<Product>
 
     @GET("products/categories/{idCategory}")
-    suspend fun getProductsCategory(@Path("idCategory") idCategory: Int): ProductsCategory
+    suspend fun getProductsCategory(@Path("idCategory") idCategory: Int): List<Product>
 
-    @GET("products/bestSellers")
+    @GET("products/best-sellers")
     suspend fun getBestSellers(): List<Product>
 
     @GET("products/{idProduct}")
@@ -45,6 +46,10 @@ interface EcommerceApiService {
 //    Orders
     @GET("orders")
     suspend fun getOrders() : List<Order>
+
+    @GET("orders/{idOrder}")
+    suspend fun getOrder(@Path("idOrder") orderId: Int): Response<Order>
+
 
 //    Users
 
@@ -70,4 +75,6 @@ interface EcommerceApiService {
 //    @POST("/auth/google")
 //    suspend fun authenticateWithGoogle(@Body googleToken: GoogleToken): Response<AuthToken>
 
+    @PATCH("/users/{idUser}/edit")
+    suspend fun updateUserInformation(@Path("idUser") idUser: Int, @Body user: User): Response<User>
 }

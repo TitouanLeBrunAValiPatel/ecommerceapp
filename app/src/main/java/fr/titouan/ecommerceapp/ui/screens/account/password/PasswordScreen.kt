@@ -12,10 +12,13 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import fr.titouan.ecommerceapp.R
@@ -23,11 +26,12 @@ import fr.titouan.ecommerceapp.R
 @Composable
 fun PasswordScreen(
     password: String,
-    onPasswordClick: (oldPassword: String, newPassword: String) -> Unit,
+    onPasswordClick: (newPassword: String) -> Unit,
 
 ){
     var oldPassword = remember { mutableStateOf("") }
     var newPassword = remember { mutableStateOf("") }
+    var passwordError by remember { mutableStateOf<Int?>(null) }
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
@@ -57,15 +61,21 @@ fun PasswordScreen(
 
         Button(onClick = {
             if(password != oldPassword.value) {
-
+                passwordError = R.string.old_password_mismatch_error
             } else {
-                onPasswordClick(oldPassword.value, newPassword.value)
+                passwordError = null
+                onPasswordClick(newPassword.value)
             }
         }) {
             Text(text = stringResource(id = R.string.nav_set_password))
         }
 
         Spacer(modifier = Modifier.height(16.dp))
-
+        passwordError?.let { error ->
+            Text(
+                text = stringResource(id = error),
+                color = Color.Red
+            )
+        }
     }
 }

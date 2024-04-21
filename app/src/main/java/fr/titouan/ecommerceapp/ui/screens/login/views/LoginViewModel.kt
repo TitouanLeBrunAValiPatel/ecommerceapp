@@ -29,15 +29,8 @@ import fr.titouan.ecommerceapp.data.GetSampleData
 import fr.titouan.ecommerceapp.data.network.NetworkResult
 import fr.titouan.ecommerceapp.data.repository.EcommerceRepository
 import fr.titouan.ecommerceapp.data.sharedPreferences.SessionManager
-import fr.titouan.ecommerceapp.model.Product
 import fr.titouan.ecommerceapp.model.User
-import fr.titouan.ecommerceapp.ui.screens.account.login.orders.views.OrdersUiState
-import fr.titouan.ecommerceapp.ui.screens.product.views.ProductUiState
-import fr.titouan.ecommerceapp.ui.screens.product.views.ProductViewModel
-import kotlinx.coroutines.CompletableDeferred
 import kotlinx.coroutines.launch
-import retrofit2.HttpException
-import java.io.IOException
 import java.security.MessageDigest
 import java.util.UUID
 

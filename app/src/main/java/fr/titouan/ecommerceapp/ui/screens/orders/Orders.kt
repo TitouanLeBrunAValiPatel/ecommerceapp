@@ -20,11 +20,9 @@ import androidx.navigation.compose.composable
 import fr.titouan.ecommerceapp.Debug
 import fr.titouan.ecommerceapp.R
 import fr.titouan.ecommerceapp.ui.components.ErrorScreen
-import fr.titouan.ecommerceapp.ui.screens.home.Home
-import fr.titouan.ecommerceapp.ui.screens.account.login.orders.views.OrdersRowScreen
+import fr.titouan.ecommerceapp.ui.screens.orders.views.OrdersRowScreen
 import fr.titouan.ecommerceapp.ui.screens.account.login.orders.views.OrdersUiState
 import fr.titouan.ecommerceapp.ui.screens.account.login.orders.views.OrdersViewModel
-import fr.titouan.ecommerceapp.ui.screens.product.Product.navigateToProduct
 
 object Orders {
     private const val RouteBase = "Orders"

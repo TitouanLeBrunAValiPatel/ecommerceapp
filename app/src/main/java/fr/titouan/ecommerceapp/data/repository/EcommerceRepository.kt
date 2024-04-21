@@ -17,7 +17,7 @@ import java.io.IOException
 interface EcommerceRepository {
 //    Products
     suspend fun getProducts(): List<Product>
-    suspend fun getProductsCategory(idCategory : Int): ProductsCategory
+    suspend fun getProductsCategory(idCategory : Int): List<Product>
     suspend fun getBestSellers(): List<Product>
     suspend fun getProduct(idProduct: Int): NetworkResult<Product>
 
@@ -30,8 +30,10 @@ interface EcommerceRepository {
 
 //    Orders
     suspend fun getOrders(): List<Order>
+    suspend fun getOrder(orderId: Int): NetworkResult<Order>
 
-//    Users
+
+    //    Users
     suspend fun getUser(idUser: Int) : NetworkResult<User>
 
 //    Access with token
@@ -45,4 +47,6 @@ interface EcommerceRepository {
 
 //    Access with id
     suspend fun authenticateWithGoogleWithId(googleToken: String): NetworkResult<User>
+
+    suspend fun updateInformationUser(user: User): NetworkResult<User>
 }

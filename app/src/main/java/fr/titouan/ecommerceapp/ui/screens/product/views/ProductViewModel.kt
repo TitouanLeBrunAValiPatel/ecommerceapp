@@ -13,6 +13,7 @@ import fr.titouan.ecommerceapp.data.GetSampleData
 import fr.titouan.ecommerceapp.data.network.NetworkResult
 import fr.titouan.ecommerceapp.data.repository.EcommerceRepository
 import fr.titouan.ecommerceapp.model.Product
+import fr.titouan.ecommerceapp.ui.screens.order.views.OrderViewModel
 import kotlinx.coroutines.launch
 
 sealed interface ProductUiState {

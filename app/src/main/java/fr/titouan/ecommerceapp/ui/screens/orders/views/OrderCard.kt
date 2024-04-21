@@ -32,7 +32,7 @@ import fr.titouan.ecommerceapp.ui.theme.EcommerceappTheme
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun OrderCard(
-    onOrderClicked: (Int) -> Unit,
+    onOrderClicked: (Int) -> Unit = { },
     order: Order,
     modifier: Modifier = Modifier
 ) {

@@ -91,11 +91,11 @@ object Products {
             }
 
             is ProductsUiState.Success -> {
-                Title.value = stringResource(id = R.string.category_title, productsUiState.productsCategory.safeCategory.name)
+                Title.value = stringResource(id = R.string.category_title, "Type")
                 setTitle(Title.value)
                 ProductsGridScreen(
                     onProductClicked = onProductClicked,
-                    products = productsUiState.productsCategory.products
+                    products = productsUiState.productsCategory
                 )
             }
 

@@ -1,14 +1,12 @@
 package fr.titouan.ecommerceapp.data.network
 
 import fr.titouan.ecommerceapp.data.repository.EcommerceRepository
-import fr.titouan.ecommerceapp.model.AuthToken
 import fr.titouan.ecommerceapp.model.Category
 import fr.titouan.ecommerceapp.model.Color
 import fr.titouan.ecommerceapp.model.Credentials
 import fr.titouan.ecommerceapp.model.GoogleToken
 import fr.titouan.ecommerceapp.model.Order
 import fr.titouan.ecommerceapp.model.Product
-import fr.titouan.ecommerceapp.model.ProductsCategory
 import fr.titouan.ecommerceapp.model.User
 import fr.titouan.ecommerceapp.network.EcommerceApiService
 sealed class NetworkResult<out T> {
@@ -21,7 +19,7 @@ class NetworkEcommerceRepository(
 ) : EcommerceRepository {
     //    Products
     override suspend fun getProducts(): List<Product> = ecommerceApiService.getProducts()
-    override suspend fun getProductsCategory(idCategory: Int): ProductsCategory = ecommerceApiService.getProductsCategory(idCategory)
+    override suspend fun getProductsCategory(idCategory: Int): List<Product> = ecommerceApiService.getProductsCategory(idCategory)
 
     override suspend fun getBestSellers(): List<Product> = ecommerceApiService.getBestSellers()
     override suspend fun getProduct(idProduct: Int): NetworkResult<Product> {
@@ -52,8 +50,24 @@ class NetworkEcommerceRepository(
 
 //    Orders
     override suspend fun getOrders(): List<Order> = ecommerceApiService.getOrders()
+    override suspend fun getOrder(orderId: Int): NetworkResult<Order> {
+        return try {
+            val response = ecommerceApiService.getOrder(orderId)
+            if (response.isSuccessful) {
+                val order = response.body()
+                if (order != null) {
+                    NetworkResult.Success(order)
+                } else {
+                    NetworkResult.Error("La réponse de l'API est vide.")
+                }
+            } else {
+                NetworkResult.Error("Réponse de l'API non réussie: ${response.code()}")
+            }
+        } catch (e: Exception) {
+            NetworkResult.Error("Impossible de récupérer la commande à partir de l'API. ${e.message}")
+        }    }
 
-//    Users
+    //    Users
     override suspend fun getUser(idUser: Int): NetworkResult<User> {
         return try {
             val response = ecommerceApiService.getUser(idUser)
@@ -119,6 +133,24 @@ class NetworkEcommerceRepository(
         return try {
             val googleTokenRequest = GoogleToken(googleToken)
             val response = ecommerceApiService.authenticateWithGoogleWithId(googleTokenRequest)
+            if (response.isSuccessful) {
+                val user = response.body()
+                if (user is User) {
+                    NetworkResult.Success(user)
+                } else {
+                    NetworkResult.Error("Erreur de conversion en user.")
+                }
+            } else {
+                NetworkResult.Error("Réponse de l'API non réussie: ${response.code()}")
+            }
+        } catch (e: Exception) {
+            NetworkResult.Error("Impossible de récupérer le produit à partir de l'API. ${e.message}")
+        }
+    }
+
+    override suspend fun updateInformationUser(user: User): NetworkResult<User> {
+        return try {
+            val response = ecommerceApiService.updateUserInformation(user.idUser, user)
             if (response.isSuccessful) {
                 val user = response.body()
                 if (user is User) {

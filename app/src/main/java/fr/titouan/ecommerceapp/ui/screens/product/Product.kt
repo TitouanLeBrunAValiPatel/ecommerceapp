@@ -28,9 +28,9 @@ import androidx.navigation.navArgument
 import fr.titouan.ecommerceapp.Debug
 import fr.titouan.ecommerceapp.R
 import fr.titouan.ecommerceapp.ui.components.ErrorScreen
+import fr.titouan.ecommerceapp.ui.screens.product.views.ProductDetail
 import fr.titouan.ecommerceapp.ui.screens.product.views.ProductUiState
 import fr.titouan.ecommerceapp.ui.screens.product.views.ProductViewModel
-import fr.titouan.ecommerceapp.ui.screens.product.views.ProductDetail
 
 object Product {
     private const val RouteBase = "Products"

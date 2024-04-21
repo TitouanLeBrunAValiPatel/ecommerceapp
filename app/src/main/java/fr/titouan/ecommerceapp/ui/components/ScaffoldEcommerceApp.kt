@@ -7,6 +7,8 @@ import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.navigation.NavHostController
+import fr.titouan.ecommerceapp.ui.screens.account.views.AccountViewModel
+import fr.titouan.ecommerceapp.ui.screens.payment.views.PaymentViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
@@ -18,7 +20,9 @@ fun ScaffoldEcommerceApp(
     navController: NavHostController,
     action: MutableState<Boolean>,
     coroutineScope: CoroutineScope,
-    drawerState: DrawerState
+    drawerState: DrawerState,
+    accountViewModel: AccountViewModel,
+    paymentViewModel: PaymentViewModel
 ){
     Scaffold(
         topBar = {
@@ -33,7 +37,8 @@ fun ScaffoldEcommerceApp(
             BottomBar(
                 onAccountIconClick = {
                     coroutineScope.launch {
-                        drawerState.open()}
+                        drawerState.open()
+                    }
                 },
 
                 navController = navController
@@ -44,7 +49,9 @@ fun ScaffoldEcommerceApp(
             innerPadding,
             navController,
             currentScreenTitle,
-            action
+            action,
+            accountViewModel = accountViewModel,
+            paymentViewModel = paymentViewModel
         )
     }
 }

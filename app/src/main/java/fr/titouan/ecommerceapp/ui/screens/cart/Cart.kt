@@ -39,7 +39,8 @@ object Cart {
     fun Screen(
         setTitle: (String) -> Unit,
         cartAction: MutableState<Boolean>,
-        onProductClicked: (Int) -> Unit
+        onProductClicked: (Int) -> Unit,
+        onPurchaseClicked: () -> Unit
 
     ) {
         val cartViewModel: CartViewModel = viewModel(factory = CartViewModel.Factory)
@@ -71,23 +72,24 @@ object Cart {
             }
 
             is CartUiState.Success -> {
-                if(productsInCart.value.isNullOrEmpty()) {
-                    Text(text = stringResource(id = R.string.cart_empty))
-                } else {
-                    Text(text = totalPrice.value.toString())
+//                if(productsInCart.value.isNullOrEmpty()) {
+//                    Text(text = stringResource(id = R.string.cart_empty))
+//                } else {
                     CartRowScreen(
                         onProductClicked = onProductClicked,
                         productsInCart = productsInCart,
                         cartAction = cartAction,
                         actionDeleteProductInCart = { cartViewModel.removeProductToCart(it) },
-                        totalPrice = totalPrice
-                    ) { productInCart, newQuantity ->
+                        totalPrice = totalPrice,
+                        onPurchaseClicked = onPurchaseClicked
+                    ) { productInCart,
+                        newQuantity ->
                         cartViewModel.updateQuantity(
                             productInCart,
                             newQuantity
                         )
                     }
-                }
+//                }
 
             }
 
@@ -113,7 +115,8 @@ fun ScreenPreview() {
         Screen(
             setTitle = { it },
             cartAction = action,
-            onProductClicked = { it }
+            onProductClicked = { it },
+            onPurchaseClicked = { }
         )
     }
 }

@@ -15,16 +15,10 @@ import fr.titouan.ecommerceapp.data.GetSampleData
 import fr.titouan.ecommerceapp.data.network.NetworkResult
 import fr.titouan.ecommerceapp.data.repository.EcommerceRepository
 import fr.titouan.ecommerceapp.data.sharedPreferences.CartManager
-import fr.titouan.ecommerceapp.model.Color
 import fr.titouan.ecommerceapp.model.Product
 import fr.titouan.ecommerceapp.model.ProductInCart
-import fr.titouan.ecommerceapp.ui.screens.home.views.BestSellersUiState
-import fr.titouan.ecommerceapp.ui.screens.home.views.HomeViewModel
 import fr.titouan.ecommerceapp.ui.screens.product.views.ProductUiState
-import fr.titouan.ecommerceapp.ui.screens.product.views.ProductViewModel
 import kotlinx.coroutines.launch
-import retrofit2.HttpException
-import java.io.IOException
 
 sealed interface CartUiState {
     data class Success(val productsInCart: List<ProductInCart>) : CartUiState

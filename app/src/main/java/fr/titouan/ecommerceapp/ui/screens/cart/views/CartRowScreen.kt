@@ -2,9 +2,11 @@ package fr.titouan.ecommerceapp.ui.screens.cart.views
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
@@ -20,6 +22,7 @@ import fr.titouan.ecommerceapp.model.ProductInCart
 @Composable
 fun CartRowScreen(
     onProductClicked: (Int) -> Unit,
+    onPurchaseClicked : () -> Unit,
     productsInCart: MutableState<List<ProductInCart>>,
     contentPadding: PaddingValues = PaddingValues(0.dp),
     cartAction: MutableState<Boolean>,
@@ -56,6 +59,12 @@ fun CartRowScreen(
             modifier = Modifier.align(Alignment.BottomStart))
         Text(text = stringResource(id = R.string.cart_total_price,totalPrice.value),
             modifier = Modifier.align(Alignment.BottomEnd))
+        Button(
+            onClick = onPurchaseClicked,
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Text(text = stringResource(id = R.string.cart_button_purchase))
+        }
     }
 
 

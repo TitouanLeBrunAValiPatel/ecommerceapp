@@ -11,17 +11,13 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Modifier
-import androidx.lifecycle.viewmodel.compose.viewModel
-import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import fr.titouan.ecommerceapp.ui.screens.account.Account.accountNavigationEntry
 import fr.titouan.ecommerceapp.ui.screens.account.informations.Informations.navigateToSetInformations
 import fr.titouan.ecommerceapp.ui.screens.account.informations.Informations.setInformationsNavigationEntry
-import fr.titouan.ecommerceapp.ui.screens.login.Login
 import fr.titouan.ecommerceapp.ui.screens.login.Login.loginNavigationEntry
-import fr.titouan.ecommerceapp.ui.screens.account.login.orders.Orders
 import fr.titouan.ecommerceapp.ui.screens.account.login.orders.Orders.ordersNavigationEntry
 import fr.titouan.ecommerceapp.ui.screens.account.password.Password.navigateToSetPassowrd
 import fr.titouan.ecommerceapp.ui.screens.account.password.Password.setPasswordNavigationEntry
@@ -29,6 +25,13 @@ import fr.titouan.ecommerceapp.ui.screens.account.views.AccountViewModel
 import fr.titouan.ecommerceapp.ui.screens.cart.Cart
 import fr.titouan.ecommerceapp.ui.screens.category.Category
 import fr.titouan.ecommerceapp.ui.screens.home.Home
+import fr.titouan.ecommerceapp.ui.screens.order.Order.navigateToOrder
+import fr.titouan.ecommerceapp.ui.screens.order.Order.orderNavigationEntry
+import fr.titouan.ecommerceapp.ui.screens.payment.PaymentProcess
+import fr.titouan.ecommerceapp.ui.screens.payment.PaymentProcess.navigateToDeliveryInformation
+import fr.titouan.ecommerceapp.ui.screens.payment.PaymentProcess.navigateToPaymentInformation
+import fr.titouan.ecommerceapp.ui.screens.payment.PaymentProcess.paymentNavigationEntry
+import fr.titouan.ecommerceapp.ui.screens.payment.views.PaymentViewModel
 import fr.titouan.ecommerceapp.ui.screens.product.Product.navigateToProduct
 import fr.titouan.ecommerceapp.ui.screens.product.Product.productNavigationEntry
 import fr.titouan.ecommerceapp.ui.screens.products.Products.navigateToProductsCategory
@@ -39,14 +42,14 @@ fun NavHostEcommerApp(
     innerPadding: PaddingValues,
     navController : NavHostController,
     currentScreenTitle: MutableState<String>,
-    action: MutableState<Boolean>
+    action: MutableState<Boolean>,
+    accountViewModel: AccountViewModel,
+    paymentViewModel: PaymentViewModel
 
 ) {
-    val accountViewModel: AccountViewModel = viewModel(factory =  AccountViewModel.Factory)
-
     NavHost(
         navController = navController,
-        startDestination = Home.Route,
+        startDestination = Cart.Route,
         modifier = Modifier
             .fillMaxSize()
             .padding(innerPadding)
@@ -89,14 +92,20 @@ fun NavHostEcommerApp(
             Cart.Screen(
                 setTitle = { currentScreenTitle.value = it },
                 cartAction = action,
-                onProductClicked = { navController.navigateToProduct(it) }
+                onProductClicked = { navController.navigateToProduct(it) },
+                onPurchaseClicked = { navController.navigateToDeliveryInformation() }
 
             )
         }
         ordersNavigationEntry(
             setTitle = { currentScreenTitle.value = it },
-            onOrderClicked = { navController.navigateToProduct(it) }
+            onOrderClicked = { navController.navigateToOrder(it) }
         )
+
+        orderNavigationEntry(
+            setTitle = { currentScreenTitle.value = it }
+        )
+
         productsCategoryNavigationEntry(
             setTitle = { currentScreenTitle.value = it },
             onProductClicked = { navController.navigateToProduct(it) }
@@ -123,6 +132,12 @@ fun NavHostEcommerApp(
         setPasswordNavigationEntry(
             setTitle = { currentScreenTitle.value = it },
             viewModel = accountViewModel
+        )
+
+        paymentNavigationEntry(
+            setTitle = { currentScreenTitle.value = it },
+            navController = navController,
+            paymentViewModel = paymentViewModel
         )
 
     }

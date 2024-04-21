@@ -1,4 +1,4 @@
-package fr.titouan.ecommerceapp.ui.screens.product
+package fr.titouan.ecommerceapp.ui.screens.order
 
 import android.util.Log
 import androidx.compose.animation.core.tween
@@ -28,18 +28,18 @@ import androidx.navigation.navArgument
 import fr.titouan.ecommerceapp.Debug
 import fr.titouan.ecommerceapp.R
 import fr.titouan.ecommerceapp.ui.components.ErrorScreen
-import fr.titouan.ecommerceapp.ui.screens.product.views.ProductUiState
-import fr.titouan.ecommerceapp.ui.screens.product.views.ProductViewModel
-import fr.titouan.ecommerceapp.ui.screens.product.views.ProductDetail
+import fr.titouan.ecommerceapp.ui.screens.order.views.OrderUiState
+import fr.titouan.ecommerceapp.ui.screens.order.views.OrderViewModel
+import fr.titouan.ecommerceapp.ui.screens.order.views.OrderDetail
 
-object Product {
-    private const val RouteBase = "Products"
-    private const val ProductIdArgument = "productId"
-    const val Route = "$RouteBase/{$ProductIdArgument}"
+object Order {
+    private const val RouteBase = "Orders"
+    private const val OrderIdArgument = "OrderId"
+    const val Route = "$RouteBase/{$OrderIdArgument}"
     var Title: MutableState<String> = mutableStateOf("")
 
 
-    fun NavGraphBuilder.productNavigationEntry(
+    fun NavGraphBuilder.orderNavigationEntry(
         setTitle: (String) -> Unit,
     ) {
         composable(
@@ -47,39 +47,39 @@ object Product {
             enterTransition = { slideInHorizontally(initialOffsetX = { -it }) + fadeIn(animationSpec = tween(2000)) },
             exitTransition = { slideOutHorizontally(targetOffsetX = { -it }) + fadeOut(animationSpec = tween(2000)) },
             arguments = listOf(
-                navArgument(name = ProductIdArgument) {
+                navArgument(name = OrderIdArgument) {
                     type = NavType.IntType
                 }
             )
         ) {
-            val productId = it.arguments?.getInt(ProductIdArgument) ?: 1
+            val orderId = it.arguments?.getInt(OrderIdArgument) ?: 1
             Screen(
-                productId = productId,
+                orderId = orderId,
                 setTitle = setTitle,
             )
         }
     }
-    fun NavHostController.navigateToProduct(
-        productId: Int,
+    fun NavHostController.navigateToOrder(
+        orderId: Int,
     ) {
-        navigate("${RouteBase}/$productId")
+        navigate("$RouteBase/$orderId")
     }
 
     @Composable
     fun Screen(
-        productId : Int,
+        orderId : Int,
         setTitle: (String) -> Unit
     ) {
-        val productViewModel: ProductViewModel = viewModel(factory = ProductViewModel.Factory)
-        val productUiState = productViewModel.mProductUiState
+        val orderViewModel: OrderViewModel = viewModel(factory = OrderViewModel.Factory)
+        val orderUiState = orderViewModel.mOrderUiState
 
         LaunchedEffect(null) {
-            productViewModel.getProduct(productId)
+            orderViewModel.getOrder(orderId)
         }
 
-        when (productUiState) {
+        when (orderUiState) {
 
-            is ProductUiState.Loading -> Box(modifier = Modifier.fillMaxSize(),
+            is OrderUiState.Loading -> Box(modifier = Modifier.fillMaxSize(),
                 contentAlignment = Alignment.Center
             ) {
                 CircularProgressIndicator(modifier = Modifier
@@ -88,21 +88,21 @@ object Product {
                 )
             }
 
-            is ProductUiState.Success -> {
-                Title.value = stringResource(id = R.string.product_title, productUiState.product.name)
+            is OrderUiState.Success -> {
+                Title.value = stringResource(id = R.string.product_title, orderUiState.order.idOrder)
                 setTitle(Title.value)
-                ProductDetail(
-                    product = productUiState.product
+                OrderDetail(
+                    order = orderUiState.order
                 )
             }
 
-            is ProductUiState.Error -> {
-                val defaultTitlePage = stringResource(id = R.string.product_title_default)
+            is OrderUiState.Error -> {
+                val defaultTitlePage = stringResource(id = R.string.order_title_default)
                 Title.value = stringResource(id = R.string.product_title, defaultTitlePage)
                 setTitle(Title.value)
-                Log.d(Debug.TAG, productUiState.message)
+                Log.d(Debug.TAG, orderUiState.message)
                 ErrorScreen(
-                    retryAction = { productViewModel.getSafeProduct(productId) },
+                    retryAction = { orderViewModel.getSafeOrder(orderId) },
                     modifier = Modifier.fillMaxSize()
                 )
             }

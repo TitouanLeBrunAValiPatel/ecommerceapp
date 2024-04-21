@@ -1,4 +1,4 @@
-package fr.titouan.ecommerceapp.ui.screens.account.login.orders.views
+package fr.titouan.ecommerceapp.ui.screens.orders.views
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -11,10 +11,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import fr.titouan.ecommerceapp.model.Order
+import fr.titouan.ecommerceapp.ui.screens.account.login.orders.views.OrderCard
 
 @Composable
 fun OrdersRowScreen(
-    onOrderClicked: (Int) -> Unit,
+    onOrderClicked: (Int) -> Unit ,
     orders: List<Order>,
     contentPadding: PaddingValues = PaddingValues(0.dp),
 ) {

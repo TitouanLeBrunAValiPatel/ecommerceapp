@@ -51,4 +51,18 @@
     <string name="informations_button_set_informations">Set my informations</string>
     <string name="password_title">Set password</string>
     <string name="informations_title">Set informations</string>
+    <string name="old_password_mismatch_error">Invalid password</string>
+    <string name="order_title_default">Order detail</string>
+    <string name="cart_button_purchase">Passer au paiement</string>
+    <string name="payment_title">%1$s</string>
+    <string name="payment_title_default">Payment Process</string>
+    <string name="payment_title_success_payment_information">Payment</string>
+    <string name="payment_title_success">Thanks you %1$s</string>
+    <string name="payment_title_success_delivery_information">Delivery</string>
+    <string name="payment_next_process">Next</string>
+    <string name="payment_radio_button_delivery_address">Delivery address</string>
+    <string name="payment_radio_button_payment_mode">Mode de paiement</string>
+    <string name="payment_process_delivery">Delivery process</string>
+    <string name="payment_process_payment">Payment process</string>
+    <string name="payment_process_success">Congratulation</string>
 </resources>

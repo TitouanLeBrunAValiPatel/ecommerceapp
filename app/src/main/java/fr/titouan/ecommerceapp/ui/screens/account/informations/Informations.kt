@@ -7,6 +7,7 @@ import androidx.compose.animation.slideInHorizontally
 import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
@@ -31,12 +32,19 @@ object Informations {
         )
         {
             Title.value = stringResource(id = R.string.informations_title)
-
             setTitle(Title.value)
-            InformationsScreen(
-                user = User(1,"", "", gender = ""),
-                onSetInformationsClick = {}
-            )
+
+            val user = remember {
+                viewModel.user
+            }
+
+
+            if (user != null) {
+                InformationsScreen(
+                    user = user,
+                    onSetInformationsClick = { viewModel.setInformations(it) }
+                )
+            }
         }
     }
     fun NavHostController.navigateToSetInformations() {

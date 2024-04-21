@@ -1,4 +1,4 @@
-package fr.titouan.ecommerceapp.ui.screens.product.views
+package fr.titouan.ecommerceapp.ui.screens.order.views
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -12,40 +12,42 @@ import fr.titouan.ecommerceapp.EcommerceApplication
 import fr.titouan.ecommerceapp.data.GetSampleData
 import fr.titouan.ecommerceapp.data.network.NetworkResult
 import fr.titouan.ecommerceapp.data.repository.EcommerceRepository
-import fr.titouan.ecommerceapp.model.Product
+import fr.titouan.ecommerceapp.model.Order
 import kotlinx.coroutines.launch
 
-sealed interface ProductUiState {
-    data class Success(val product: Product) : ProductUiState
-    data class Error(val message : String) : ProductUiState
-    data object Loading : ProductUiState
+sealed interface OrderUiState {
+    data class Success(val order: Order) : OrderUiState
+    data class Error(val message : String) : OrderUiState
+    data object Loading : OrderUiState
 }
 
-class ProductViewModel(
+class OrderViewModel(
     private val ecommerceRepository: EcommerceRepository
 ) : ViewModel() {
 
-    var mProductUiState: ProductUiState by mutableStateOf(ProductUiState.Loading)
+    var mOrderUiState: OrderUiState by mutableStateOf(OrderUiState.Loading)
         private set
-    var mProduct: Product? by mutableStateOf(null)
+    var mOrder: Order? by mutableStateOf(null)
         private set
 
-    fun getProduct(productId : Int) {
+    fun getOrder(orderId : Int) {
         viewModelScope.launch {
-            mProductUiState = ProductUiState.Loading
-            val result = ecommerceRepository.getProduct(productId)
-            mProductUiState = when (result) {
-                is NetworkResult.Success -> ProductUiState.Success(result.data)
-                is NetworkResult.Error -> ProductUiState.Error(result.message ?: "Une erreur inconnue est survenue.")
-                NetworkResult.Loading -> ProductUiState.Loading
+            mOrderUiState = OrderUiState.Loading
+            val result = ecommerceRepository.getOrder(orderId)
+            mOrderUiState = when (result) {
+                is NetworkResult.Success -> OrderUiState.Success(result.data)
+                is NetworkResult.Error -> OrderUiState.Error(
+                    result.message ?: "Une erreur inconnue est survenue."
+                )
+                NetworkResult.Loading -> OrderUiState.Loading
             }
         }
     }
 
 
-    fun getSafeProduct(productId: Int) {
-        mProduct = GetSampleData.getProduct(productId)
-        mProductUiState = ProductUiState.Success(product = mProduct!!)
+    fun getSafeOrder(orderId: Int) {
+        mOrder = GetSampleData.getOrder(orderId)
+        mOrderUiState = OrderUiState.Success(order = mOrder!!)
     }
 
     companion object {
@@ -53,7 +55,7 @@ class ProductViewModel(
             initializer {
                 val application = (this[ViewModelProvider.AndroidViewModelFactory.APPLICATION_KEY] as EcommerceApplication)
                 val ecommerceRepository : EcommerceRepository = application.container.ecommerceRepository
-                ProductViewModel(ecommerceRepository = ecommerceRepository)
+                OrderViewModel(ecommerceRepository = ecommerceRepository)
             }
         }
     }

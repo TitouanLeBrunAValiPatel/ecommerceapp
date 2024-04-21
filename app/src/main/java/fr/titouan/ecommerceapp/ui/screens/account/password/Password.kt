@@ -1,5 +1,6 @@
 package fr.titouan.ecommerceapp.ui.screens.account.password
 
+import android.util.Log
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
@@ -24,6 +25,7 @@ object Password {
         setTitle: (String) -> Unit,
         viewModel: AccountViewModel
     ) {
+        Log.d("TITOUAN",viewModel.user.toString())
         composable(
             route = Route,
             enterTransition = { slideInHorizontally(initialOffsetX = { -it }) + fadeIn(animationSpec = tween(2000)) },
@@ -32,10 +34,12 @@ object Password {
         {
             Title.value = stringResource(id = R.string.password_title)
             setTitle(Title.value)
-            PasswordScreen(
-                password = "",
-                onPasswordClick = { oldPassword, newPassword -> {  }  }
-            )
+            viewModel.user?.let { user ->
+                PasswordScreen(
+                    password = user.safePassword,
+                    onPasswordClick = { viewModel.setPassword(it) }
+                )
+            }
         }
     }
     fun NavHostController.navigateToSetPassowrd() {
